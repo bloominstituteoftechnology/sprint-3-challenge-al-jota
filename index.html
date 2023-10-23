@@ -173,21 +173,16 @@
       constructor(fullBookText, numPageChars) {
         this.fullBookText = fullBookText;
         this.numPageChars = numPageChars;
-        // this.page = page;
-        console.log(fullBookText)
-        console.log(numPageChars)
+        this.currentIndex = 0;
       }
 
-      next() {
-        if(this.fullBookText.length > this.numPageChars) {
-          return this.fullBookText.slice(0, this.numPageChars)
-        } else {
-          return null
+      next(){
+        if (this.currentIndex >= this.fullBookText.length) {
+          return null;
         }
-      }
-
-      back() {
-
+        const page = this.fullBookText.slice(this.currentIndex, this.currentIndex + this.numPageChars);
+        this.currentIndex += this.numPageChars;
+        return page;
       }
 
     }
