@@ -18,7 +18,6 @@
     .widget p {
       font-style: italic;
     }
-
   </style>
 </head>
 
@@ -59,6 +58,48 @@
       // ❗ WARNING: except for `getAllReversed`, methods must respect the order of the integers
       // ❗ WARNING: note that none of the methods actually mutate the `ints` property
 
+      constructor(...ints) {
+        this.ints = ints;
+      }
+
+      getAll() {
+        return this.ints;
+      }
+      getEvens() {
+        return this.ints.filter(function (num) {
+          return num % 2 === 0;
+        });
+      }
+      getNegatives() {
+        return this.ints.filter(function (num) {
+          return num < 0;
+        });
+      }
+      getAllSquared() {
+        return this.ints.map(function (num) {
+          return num ** 2;
+        });
+      }
+      pop() {
+        return this.ints.pop();
+      }
+      push(n) {
+        this.ints.push(n);
+        return this.ints;
+      }
+
+      getEveryNth(nth) {
+        let result = [];
+        for (let i = 0; i < this.ints.length; i += nth) {
+          result.push(this.ints[i]);
+        }
+        return result;
+      }
+
+      getAllReversed() {
+        return this.ints.reverse();
+      }
+
     }
 
     // 👉 CHALLENGE 2 NerfGun
@@ -76,6 +117,39 @@
       //      * When engaging the safety, return "Safety enabled!"
       //      * When disengaging the safety, return "Safety disabled!"
       // 🌟 HINT: instances need to keep track of their maximum capacity as well as their current capacity
+
+      constructor(numProjectiles) {
+        this.numProjectiles = numProjectiles;
+        this.currentProjectiles = numProjectiles;
+        this.safetyOn = true;
+      }
+
+      shoot() {
+        if (!this.safetyOn && this.currentProjectiles > 0) {
+          this.currentProjectiles--;
+          return "Bang!";
+        } else {
+          return "Click!";
+        }
+      }
+
+      reload(num) {
+        if(typeof num === "number" && num > 0){
+          this.currentProjectiles = Math.min(this.numProjectiles, this.currentProjectiles + num);
+          return `${this.currentProjectiles} projectiles left!`;
+        } else {
+          return `Error reloading!`;
+        }
+      }
+
+      toggleSafety() {
+        this.safetyOn = !this.safetyOn;
+        if (this.safetyOn) {
+          return "Safety enabled!";
+        } else {
+          return "Safety disabled!";
+        }
+      }
 
     }
 
@@ -95,6 +169,26 @@
       //    ebook.next() // returns null
       // 🌟 HINT: remember about the `slice` method which strings and arrays have
       // ❗ Feel free to implement `back`, although this is not required nor graded
+
+      constructor(fullBookText, numPageChars) {
+        this.fullBookText = fullBookText;
+        this.numPageChars = numPageChars;
+        // this.page = page;
+        console.log(fullBookText)
+        console.log(numPageChars)
+      }
+
+      next() {
+        if(this.fullBookText.length > this.numPageChars) {
+          return this.fullBookText.slice(0, this.numPageChars)
+        } else {
+          return null
+        }
+      }
+
+      back() {
+
+      }
 
     }
 
@@ -130,6 +224,20 @@
       //      console.log(list) // prints ["a"]
       // 👉 HINT: if you are not feeling confident with map and filter, solve the problem with for loops,
       //      and with the piece of mind of all tests passing, refactor to use map/filter
+
+      constructor(...names) {
+        this.names = names;
+        this.ants = ants;
+
+      }
+
+      work() {
+
+      }
+
+      feed() {
+
+      }
 
     }
 
