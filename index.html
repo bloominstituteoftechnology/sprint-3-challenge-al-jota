@@ -134,7 +134,7 @@
       }
 
       reload(num) {
-        if(typeof num === "number" && num > 0){
+        if (typeof num === "number" && num > 0) {
           this.currentProjectiles = Math.min(this.numProjectiles, this.currentProjectiles + num);
           return `${this.currentProjectiles} projectiles left!`;
         } else {
@@ -176,7 +176,7 @@
         this.currentIndex = 0;
       }
 
-      next(){
+      next() {
         if (this.currentIndex >= this.fullBookText.length) {
           return null;
         }
@@ -220,21 +220,44 @@
       // 👉 HINT: if you are not feeling confident with map and filter, solve the problem with for loops,
       //      and with the piece of mind of all tests passing, refactor to use map/filter
 
-      constructor(...names) {
-        this.names = names;
-        this.ants = ants;
-
+      constructor(...ants) {
+        this.ants = ants.map(name => ({ name, health: 100 }));
       }
 
       work() {
+        const antLength = this.ants.length;
+        if (antLength === 0) {
+          return `No ants here. Did you work them to death?`;
+        }
 
+        this.ants = this.ants.map(ants => {
+          ants.health -= 20;
+          return ants;
+        })
+        this.ants = this.ants.filter(ants => {
+          return ants.health > 0;
+        })
+        return `${antLength} ants starting work!`;
       }
 
-      feed() {
-
+      feed(name) {
+        let counter = 0;
+        this.ants = this.ants.map(ants => {
+          if (ants.name === name) {
+            ants.health += 15;
+            counter++;
+          }
+          return ants;
+        })
+        if (counter > 0) {
+          return "Yum!";
+        } else {
+          return `${name} not found!`;
+        }
       }
 
     }
+
 
     // 🧪 TESTS, do not make any changes below this line ===================
     // 🧪 TESTS, do not make any changes below this line ===================
